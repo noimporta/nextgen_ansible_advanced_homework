@@ -1,11 +1,6 @@
 ---
 
 # tasks file for osp.servers
-- name: Debug
-  debug:
-    msg: "{{ item.meta[0].group }}"
-  loop: "{{ osp_servers }}"
-
 - name: Create OSP servers
   os_server:
     cloud: openstack
