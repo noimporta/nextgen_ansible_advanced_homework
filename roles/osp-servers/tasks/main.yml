@@ -1,6 +1,10 @@
 ---
 
 # tasks file for osp.servers
+- name: Debug
+  debug:
+    msg: "{{ item.meta[0].group }}"
+  loop: "{{ osp_servers }}"
 
 - name: Create OSP servers
   os_server:
@@ -14,8 +18,8 @@
     wait: no
     nics:
       - net-name: int_network
-    meta: "group={{ __server.meta.group }},deployment_name={{ __server.meta.deployment }}"
-  loop:             "{{ osp_servers }}"
+    meta: "group={{ __server.meta[0].group }},deployment_name={{ __server.meta[0].deployment_name }}"
+  loop:              "{{ osp_servers }}"
   loop_control:
     loop_var: __server
   register: r_instances
@@ -25,7 +29,7 @@
     cloud: openstack
     state: "{{ openstack_server_state | default('present') }}"
     reuse: yes
-    server: "{{ __instance.__openstack_server.instance_name }}"
+    server: "{{ __instance.openstack_server.instance_name }}"
     network: ext_network
     wait: true
     timeout: 180
