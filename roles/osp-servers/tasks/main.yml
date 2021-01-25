@@ -1,3 +1,35 @@
 ---
 
 # tasks file for osp.servers
+
+- name: Create OSP servers
+  os_server:
+    cloud: openstack
+    name:             "{{ __server.name           }}"
+    image:            "{{ __server.image          }}"
+    key_name:         "{{ __server.key_name       }}"
+    flavor:           "{{ __server.flavor         }}"
+    security_groups:  "{{ __server.security_group }}"
+    delete_fip: yes
+    wait: no
+    nics:
+      - net-name: int_network
+    meta: "group={{ __server.meta.group }},deployment_name={{ __server.meta.deployment }}"
+  loop:             "{{ osp_servers }}"
+  loop_control:
+    loop_var: __server
+  register: r_instances
+
+- name: Add floating IP to instances
+  os_floating_ip:
+    cloud: openstack
+    state: "{{ openstack_server_state | default('present') }}"
+    reuse: yes
+    server: "{{ __instance.__openstack_server.instance_name }}"
+    network: ext_network
+    wait: true
+    timeout: 180
+  loop: "{{ r_instances.results }}"
+  loop_control:
+    loop_var: __instance
+  
