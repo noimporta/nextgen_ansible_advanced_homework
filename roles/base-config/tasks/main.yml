@@ -9,6 +9,14 @@
     backup: yes
 
 - name: enable repos
+  template:
+    dest: "/etc/yum.repos.d/rhel-7-server-rpms.repo"
+    src: repos_template.j2
+    owner: root
+    group: root
+    mode: 400
  
 - name: install base tools and packages
-
+  yum:
+    name: '*'
+    state: latest
