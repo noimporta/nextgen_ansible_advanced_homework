@@ -19,16 +19,19 @@
     loop_var: __server
   register: r_instances
 
+- name: debug
+  debug:
+    var: r_instances
+
 - name: Add floating IP to instances
   os_floating_ip:
     cloud: openstack
-    state: "{{ openstack_server_state | default('present') }}"
+    state: present
     reuse: yes
-    server: "{{ __instance.openstack_server.instance_name }}"
+    server: "{{ __instance.server.name }}"
     network: ext_network
     wait: true
     timeout: 180
   loop: "{{ r_instances.results }}"
   loop_control:
     loop_var: __instance
-  
