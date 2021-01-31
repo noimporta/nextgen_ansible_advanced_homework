@@ -20,3 +20,4 @@
      with_items: "{{result.openstack_servers}}"
    - name: Gather facts from new hosts
      setup:
+     hosts: all
