@@ -1,4 +1,8 @@
 ---
+- name: debug
+  debug:
+    msg: "{{ hostvars[item] }}"
+  loop: "{{ groups['appdbs'] }}"
 - name: Add appdb1 IP address to app servers /etc/hosts
   lineinfile:
     dest: /etc/hosts
