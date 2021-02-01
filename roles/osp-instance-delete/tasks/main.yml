@@ -10,7 +10,7 @@
       cloud: openstack
       name: "{{ __server.name }}"
       state: absent
-    loop: result.openstack_servers
+    loop: "{{ result.openstack_servers }}"
     loop_control:
       loop_var: "__server"
     
