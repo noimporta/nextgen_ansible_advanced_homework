@@ -6,19 +6,18 @@
   tasks:
 
 - name: Smoke test
-  hosts: frontends
+  hosts: workstation
   gather_facts: false
   tasks:
   - name: Check webserver for correct response
     uri:
-      url: "http://{{ inventory_hostname }}/ping"
+      url: "http://{{ hostvars[item]['inventory_hostname'] }}/ping"
       return_content: yes
     until: '"alive" in result.content'
     retries: 10
     delay: 1
     register: result
-    delegate_to: workstation
-
+    loop: "{{ groups['frontends'] }}"
 
   # - name: OpenStack servers
   # - name: Curl website
