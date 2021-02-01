@@ -1,6 +1,25 @@
-- hosts: workstation
+- name: Gathering information about OSP QA env
+  hosts: workstation
+  gather_facts: false
+  roles:
+  - osp-facts
+  tasks:
+
+- name: Smoke test
+  hosts: frontends
   gather_facts: false
   tasks:
+  - name: Check webserver for correct response
+    uri:
+      url: "http://{{ ansible_hostname }}/ping"
+      return_content: yes
+    until: '"alive" in result.content'
+    retries: 10
+    delay: 1
+    register: result
+    delegate_to: workstation
+
+
   - name: OpenStack servers
   - name: Curl website
 
