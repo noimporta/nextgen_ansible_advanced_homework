@@ -11,7 +11,7 @@
   tasks:
   - name: Check webserver for correct response
     uri:
-      url: "http://{{ ansible_hostname }}/ping"
+      url: "http://{{ inventory_hostname }}/ping"
       return_content: yes
     until: '"alive" in result.content'
     retries: 10
