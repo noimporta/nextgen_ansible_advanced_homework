@@ -13,14 +13,6 @@
     - {name: base-config, tags: base-config}
     - {name: db-tier, tags: [dbs, postgres]}
 
-# Setup front-end load balancer tier
-
-- name: setup load-balancer tier
-  hosts: frontends
-  become: yes
-  roles:
-    - {name: base-config, tags: base-config}
-    - {name: lb-tier, tags: [lbs, haproxy]}
 
 # Setup application servers tier
 
@@ -32,3 +24,11 @@
     - {name: base-config, tags: base-config}
     - {name: app-tier, tags: [apps, tomcat]}
 
+# Setup front-end load balancer tier
+
+- name: setup load-balancer tier
+  hosts: frontends
+  become: yes
+  roles:
+    - {name: base-config, tags: base-config}
+    - {name: lb-tier, tags: [lbs, haproxy]}
