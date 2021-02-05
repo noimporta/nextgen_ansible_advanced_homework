@@ -5,6 +5,7 @@
     uri:
       url: "http://localhost/ping"
       return_content: yes
+    register: result
     until: '"alive" in result.content'
     retries: 10
     delay: 1
