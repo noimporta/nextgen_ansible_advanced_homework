@@ -1,4 +1,4 @@
-- hosts: frontends
+- hosts: tag_AnsibleGroup_frontends
   gather_facts: false
   tasks:
   - name: Check webserver for correct response
