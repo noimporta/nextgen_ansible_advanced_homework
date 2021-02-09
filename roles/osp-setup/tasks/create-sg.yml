@@ -1,5 +1,4 @@
 ---
-# tasks file for osp.security
 - name: Create Security Group Apps
   os_security_group:
     cloud: openstack

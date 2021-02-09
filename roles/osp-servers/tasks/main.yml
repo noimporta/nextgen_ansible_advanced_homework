@@ -1,6 +1,4 @@
 ---
-
-# tasks file for osp.servers
 - name: Create OSP servers
   os_server:
     cloud: openstack
@@ -29,10 +27,6 @@
   loop_control:
     loop_var: __server
   register: r_instances
-
-- name: debug
-  debug:
-    var: r_instances
 
 - name: Add floating IP to instances
   os_floating_ip:

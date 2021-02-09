@@ -15,8 +15,3 @@
     owner: root
     group: root
     mode: 400
- 
-- name: install base tools and packages
-  yum:
-    name: '*'
-    state: latest

@@ -1,5 +1,6 @@
 
-- hosts: localhost
+- name: Setup prerequisites
+  hosts: localhost
   vars:
     OSP_GUID: "{{ lookup('env','OSP_GUID') }}"
     OSP_DOMAIN: "{{ lookup('env','OSP_DOMAIN') }}"
@@ -11,7 +12,8 @@
        group: workstation
        ansible_user: "{{ OPENTLC_ID }}"       
 
-- hosts: workstation
+- name: Configure OSP workstation
+  hosts: workstation
   become: yes
   roles:
     - setup-workstation

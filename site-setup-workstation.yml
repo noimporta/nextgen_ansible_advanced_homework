@@ -1,6 +1,7 @@
 # Playbook to setup workstation and create osp network, router, SG and ssh keypair
 
-- hosts: localhost
+- name: Setup workstation 1/2
+  hosts: localhost
   tasks:
   - name: Create workstation inventory
     add_host:
@@ -8,7 +9,8 @@
        group: workstation
 
 
-- hosts: workstation
+- name: Setup workstation 2/2
+  hosts: workstation
   become: yes
   roles:
     - setup-workstation

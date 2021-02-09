@@ -1,4 +1,5 @@
-- hosts: localhost
+- name: Provision QA environment in OSP
+  hosts: localhost
   connection: local
   become: no
   gather_facts: true

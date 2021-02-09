@@ -1,4 +1,5 @@
-- hosts: localhost
+- name: Configure an isolated node in Ansible Tower
+  hosts: localhost
   vars:
     OSP_GUID: "{{ lookup('env','OSP_GUID') }}"
     OSP_DOMAIN: "{{ lookup('env','OSP_DOMAIN') }}"

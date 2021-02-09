@@ -1,4 +1,5 @@
-- hosts: tag_AnsibleGroup_frontends
+- name: Smoke test AWS Prod environment
+  hosts: tag_AnsibleGroup_frontends
   gather_facts: false
   tasks:
   - name: Check webserver for correct response

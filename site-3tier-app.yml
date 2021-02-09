@@ -1,4 +1,5 @@
-- hosts: workstation
+- name: gather information about QA environment in OSP
+  hosts: workstation
   gather_facts: true
   roles:
   - name: osp-facts
